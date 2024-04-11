@@ -1,4 +1,4 @@
 <template>
   <router-view/>
-  <notifications position="bottom right" />
+  <notifications position="bottom right" ignoreDuplicates />
 </template>
