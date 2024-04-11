@@ -15,6 +15,21 @@
           <label
             for="email"
             class="block text-sm font-medium leading-6 text-gray-900"
+            >Username</label
+          >
+          <div class="mt-2">
+            <input
+              v-model="username"
+              type="text"
+              required
+              class="block w-full rounded-md border-0 p-1.5 text-gray-900 shadow-sm ring-1 ring-inset outline-none ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
+            />
+          </div>
+        </div>
+        <div>
+          <label
+            for="email"
+            class="block text-sm font-medium leading-6 text-gray-900"
             >Email address</label
           >
           <div class="mt-2">
@@ -61,7 +76,7 @@
       <p class="mt-10 text-center text-sm text-gray-500">
         Already have an account?
         <a
-          href="#"
+          @click="$router.push('/')"
           class="font-semibold leading-6 text-indigo-600 hover:text-indigo-500"
           >Login</a
         >
@@ -74,6 +89,7 @@
 export default {
   data() {
     return {
+      username: "",
       email: "",
       password: "",
       type: "",
@@ -82,17 +98,26 @@ export default {
   },
   methods: {
     registerAccount() {
-      if (!/^[\w.-]+@([\w-]+\.)+[\w-]{2,4}$/g.test(this.email)) {
+      if (/^\s*$/.test(this.username)) {
+        this.type = "warn";
+        this.text = "Please input a username.";
+      } else if (!/^[\w.-]+@([\w-]+\.)+[\w-]{2,4}$/g.test(this.email)) {
         this.type = "warn";
         this.text = "Please input a valid email.";
       } else if (/^\s*$/.test(this.password)) {
         this.type = "warn";
         this.text = "Please input a password.";
       } else {
-        const newAcc = { email: this.email, password: this.password, cart: [] };
+        const newAcc = {
+          username: this.username,
+          email: this.email,
+          password: this.password,
+          cart: [],
+        };
 
         this.$store.commit("addAccount", newAcc);
 
+        this.username = "";
         this.email = "";
         this.password = "";
         this.type = "success";
