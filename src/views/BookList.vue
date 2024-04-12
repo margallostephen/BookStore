@@ -10,7 +10,7 @@
         </h5>
         <div class="flex items-center justify-between flex-wrap gap-5 mt-5">
           <span class="text-xl font-semibold text-gray-900">{{
-            "$" + book.price.toFixed(2)
+            "$" + book.price
           }}</span>
           <button @click="addToCart(book)"
             class="px-4 py-2 bg-indigo-600 hover:bg-indigo-700 focus:ring-2 focus:ring-indigo-300 focus:outline-none font-semibold text-white rounded-lg text-sm transition-colors">
