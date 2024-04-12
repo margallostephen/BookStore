@@ -43,7 +43,7 @@
           <ShoppingCart />
         </li>
         <li class="max-lg:border-b max-lg:py-2 px-3" v-if="isAuthenticated">
-          <a class="cursor-pointer">
+          <a @click="handleLogout" class="cursor-pointer">
             <div class="flex items-center bg-white">
               <div class="relative scale-75">
                 <svg class="h-8 w-8 text-slate-900" width="24" height="24" viewBox="0 0 24 24" stroke-width="2"
@@ -85,6 +85,16 @@ export default {
       this.currentRoute = to.path;
       console.log(this.currentRoute);
     },
+  },
+  methods: {
+    handleLogout() {
+      this.$store.dispatch('logout');
+      this.$notify({
+        type: 'success',
+        title: 'Logout Successful',
+        text: 'Successfuly logout your account.',
+      });
+    }
   },
   mounted() {
     const toggleBtn = document.getElementById("toggle");
